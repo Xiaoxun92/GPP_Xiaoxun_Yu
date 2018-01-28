@@ -9,6 +9,7 @@ public class PlayerControl : MonoBehaviour
     public float SPEED_MIN, SPEED_MAX;
     public float ACCELERATION;
     public float TURNING_RATE;
+    public Bullet BULLET_PREFAB;
 
     float speed;
     float direction;
@@ -19,10 +20,18 @@ public class PlayerControl : MonoBehaviour
     }
 
     void Update() {
-
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            Bullet newBullet = Instantiate<Bullet>(BULLET_PREFAB, transform.position, Quaternion.identity);
+            newBullet.direction = direction;
+        }
     }
 
-    private void FixedUpdate() {
+    void FixedUpdate() {
+        // Move plane
+        Vector3 deltaPos = new Vector3(-Mathf.Sin(direction * Mathf.Deg2Rad), Mathf.Cos(direction * Mathf.Deg2Rad));
+        transform.position += deltaPos * speed * Time.fixedDeltaTime;
+        transform.SetPositionAndRotation(transform.position, Quaternion.Euler(0, 0, direction));
+
         // Check controls
         if (Input.GetKey(KeyCode.UpArrow)) {
             speed += ACCELERATION * Time.fixedDeltaTime;
@@ -36,9 +45,5 @@ public class PlayerControl : MonoBehaviour
         } else if (Input.GetKey(KeyCode.RightArrow)) {
             direction -= TURNING_RATE * Time.fixedDeltaTime;
         }
-
-        Vector3 deltaPos = new Vector3(-Mathf.Sin(direction * Mathf.Deg2Rad), Mathf.Cos(direction * Mathf.Deg2Rad));
-        transform.position += deltaPos * speed * Time.fixedDeltaTime;
-        transform.SetPositionAndRotation(transform.position, Quaternion.Euler(0, 0, direction));
     }
 }

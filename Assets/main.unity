@@ -181,7 +181,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 696429996}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.85, z: 0}
+  m_LocalPosition: {x: -0.005, y: -3.273, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -202,6 +202,8 @@ MonoBehaviour:
   SPEED_MAX: 3
   ACCELERATION: 2
   TURNING_RATE: 90
+  BULLET_PREFAB: {fileID: 114116245389855220, guid: 0ea4fdb0792df9b4dbd40e321bd4b871,
+    type: 2}
 --- !u!1 &1123123648
 GameObject:
   m_ObjectHideFlags: 0
