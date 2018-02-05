@@ -21,9 +21,6 @@ public class Player : MonoBehaviour
     void Update() {
         Combat();
         Movement();
-
-        if (Input.GetKeyDown(KeyCode.R))
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void Combat() {
@@ -58,9 +55,15 @@ public class Player : MonoBehaviour
         transform.position += (Vector3)speed * Time.deltaTime;
 
         // Direction controls
-        Vector3 cameraPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        float targetAngle = BasicFunc.VectorToAngle(cameraPos - transform.position);
-        BasicFunc.TransformMoveTowardsAngle(transform, targetAngle, ROTATE_SPEED * Time.deltaTime);
+        switch (currentWeapon) {
+            case WEAPON_TYPE.SPEAR:
+                if (transform.GetChild(0).gameObject.GetComponent<PlayerWeaponSpear>().directionLock == false) {
+                    Vector3 cameraPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    float targetAngle = BasicFunc.VectorToAngle(cameraPos - transform.position);
+                    BasicFunc.TransformMoveTowardsAngle(transform, targetAngle, ROTATE_SPEED * Time.deltaTime);
+                }
+                break;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {

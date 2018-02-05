@@ -11,6 +11,11 @@ public static class BasicFunc {
         return angle;
     }
     
+    // Angle in degree
+    public static Vector2 AngleToVector(float a) {
+        return new Vector2(-Mathf.Sin(a * Mathf.Deg2Rad), Mathf.Cos(a * Mathf.Deg2Rad));
+    }
+    
     public static void TransformMoveTowardsAngle(Transform t, float target, float maxDelta) {
         float angle = t.eulerAngles.z;
         angle = Mathf.MoveTowardsAngle(angle, target, maxDelta);

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerWeaponSpear : MonoBehaviour {
 
     [SerializeField] bool isReady;
+    public bool directionLock;
 
     void Start() {
     }

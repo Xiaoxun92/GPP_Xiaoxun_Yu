@@ -12,8 +12,7 @@ public class Arrow : MonoBehaviour {
 
     void Start () {
         startPos = transform.position;
-        float angle = transform.eulerAngles.z * Mathf.Deg2Rad;
-        deltaPos = new Vector2(-Mathf.Sin(angle), Mathf.Cos(angle)) * SPEED;
+        deltaPos = BasicFunc.AngleToVector(transform.eulerAngles.z) * SPEED;
 	}
 	
 	void Update () {
