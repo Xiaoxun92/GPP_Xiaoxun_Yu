@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerWeaponSpear : MonoBehaviour {
+public class PlayerWeaponSpear : ExtendedMono {
 
     [SerializeField] bool isReady;
     public bool directionLock;
@@ -10,7 +10,7 @@ public class PlayerWeaponSpear : MonoBehaviour {
     void Start() {
     }
 
-    void Update() {
+    protected override void GameUpdate() {
         if (isReady) {
             if (Input.GetAxis("Attack") > 0) {
                 gameObject.GetComponent<Animator>().Play("Stab");

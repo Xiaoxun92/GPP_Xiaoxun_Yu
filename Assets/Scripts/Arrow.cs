@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrow : MonoBehaviour {
+public class Arrow : ExtendedMono {
 
     [SerializeField] float SPEED;
     [SerializeField] float RANGE;
@@ -14,8 +14,8 @@ public class Arrow : MonoBehaviour {
         startPos = transform.position;
         deltaPos = BasicFunc.AngleToVector(transform.eulerAngles.z) * SPEED;
 	}
-	
-	void Update () {
+
+    protected override void GameUpdate() {
         transform.position += deltaPos * Time.deltaTime;
         if ((transform.position - startPos).magnitude >= RANGE)
             Destroy(gameObject);

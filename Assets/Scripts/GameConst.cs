@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public static class GameConst
-{
-}
-
+﻿
 public enum WEAPON_TYPE
 {
     SWORD, SPEAR, BOW, SHIELD,
+}
+
+public enum EVENT_TYPE {
+    PAUSE, GAME_OVER,
 }

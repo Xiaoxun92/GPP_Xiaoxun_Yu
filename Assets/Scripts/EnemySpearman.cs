@@ -23,7 +23,7 @@ public class EnemySpearman : EnemyBase {
         base.Start();
     }
 
-    void Update() {
+    protected override void GameUpdate() {
         AIGeneral();
     }
 

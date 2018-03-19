@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 // Controls player plane's movement
-public class Player : MonoBehaviour
-{
+public class Player : ExtendedMono {
     public float ACCELERATION;
     public float MOVE_SPEED_MAX;
     public float FRICTION;
@@ -18,7 +17,7 @@ public class Player : MonoBehaviour
         currentWeapon = WEAPON_TYPE.SPEAR;
     }
 
-    void Update() {
+    protected override void GameUpdate() {
         Combat();
         Movement();
     }
@@ -69,6 +68,7 @@ public class Player : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.tag != "EnemyWeapon")
             return;
+        gameManager.gameState = 2;
         Destroy(gameObject);
     }
 }

@@ -10,40 +10,40 @@ public class EventManager {
         return instance;
     }
 
-    Dictionary<string, EventDelegate> eventDelegateList = new Dictionary<string, EventDelegate>();
-    Dictionary<string, EventDelegateWithMessage> eventDelegateWithMessageList = new Dictionary<string, EventDelegateWithMessage>();
+    Dictionary<EVENT_TYPE, EventDelegate> eventDelegateList = new Dictionary<EVENT_TYPE, EventDelegate>();
+    Dictionary<EVENT_TYPE, EventDelegateWithMessage> eventDelegateWithMessageList = new Dictionary<EVENT_TYPE, EventDelegateWithMessage>();
 
-    public void Register(string eventType, EventDelegate handler) {
+    public void Register(EVENT_TYPE eventType, EventDelegate handler) {
         if (eventDelegateList.ContainsKey(eventType))
             eventDelegateList[eventType] += handler;
         else
             eventDelegateList.Add(eventType, handler);
     }
 
-    public void Register(string eventType, EventDelegateWithMessage handler) {
+    public void Register(EVENT_TYPE eventType, EventDelegateWithMessage handler) {
         if (eventDelegateWithMessageList.ContainsKey(eventType))
             eventDelegateWithMessageList[eventType] += handler;
         else
             eventDelegateWithMessageList.Add(eventType, handler);
     }
 
-    public void Send(string eventType) {
+    public void Send(EVENT_TYPE eventType) {
         if (eventDelegateList.ContainsKey(eventType))
             eventDelegateList[eventType]();
     }
 
-    public void Send(string eventType, EventMessage message) {
+    public void Send(EVENT_TYPE eventType, EventMessage message) {
         if (eventDelegateList.ContainsKey(eventType))
             eventDelegateWithMessageList[eventType](message);
     }
 
-    public void Unregister(string eventType, EventDelegate handler) {
+    public void Unregister(EVENT_TYPE eventType, EventDelegate handler) {
         eventDelegateList[eventType] -= handler;
         if (eventDelegateList[eventType] == null)
             eventDelegateList.Remove(eventType);
     }
 
-    public void Unregister(string eventType, EventDelegateWithMessage handler) {
+    public void Unregister(EVENT_TYPE eventType, EventDelegateWithMessage handler) {
         eventDelegateWithMessageList[eventType] -= handler;
         if (eventDelegateWithMessageList[eventType] == null)
             eventDelegateWithMessageList.Remove(eventType);

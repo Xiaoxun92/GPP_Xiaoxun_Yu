@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBase : MonoBehaviour {
+public class EnemyBase : ExtendedMono {
 
     public float MOVE_SPEED;
     public float ROTATE_SPEED;
@@ -13,7 +13,7 @@ public class EnemyBase : MonoBehaviour {
         player = GameObject.FindWithTag("Player");
     }
 
-    void Update() {
+    protected override void GameUpdate() {
 
     }
 

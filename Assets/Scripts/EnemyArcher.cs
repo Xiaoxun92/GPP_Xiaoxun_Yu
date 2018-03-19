@@ -14,7 +14,7 @@ public class EnemyArcher : EnemyBase {
         base.Start();
     }
 
-    void Update() {
+    protected override void GameUpdate() {
         AIGeneral();
     }
 
