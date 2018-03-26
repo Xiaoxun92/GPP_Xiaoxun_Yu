@@ -6,15 +6,20 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoExtended {
 
     public int gameState;
-    
-    void Start () {
-        gameState = 1;
+
+    void Start() {
+        gameState = 0;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update() {
         if (Input.GetKeyDown(KeyCode.R))
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            if (gameState == 0)
+                gameState = 1;
+        }
 
         if (Input.GetKeyDown(KeyCode.P)) {
             if (gameState == 1)

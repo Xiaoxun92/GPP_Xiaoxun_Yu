@@ -7,8 +7,10 @@ public class EnemyBase : MonoExtended {
     [SerializeField] protected GameObject weaponPrefab;
     protected Weapon weapon;
 
+    public int HP;
     public float MOVE_SPEED;
     public float ROTATE_SPEED;
+    public float REACTION_TIME = 0.3f;
 
     protected GameObject player;
 

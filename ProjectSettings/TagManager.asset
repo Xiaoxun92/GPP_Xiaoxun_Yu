@@ -47,3 +47,6 @@ TagManager:
   - name: Soldiers
     uniqueID: 2262529209
     locked: 0
+  - name: UI
+    uniqueID: 1795904939
+    locked: 0

@@ -16,18 +16,47 @@ public class EnemySpearman : EnemyBase {
     [SerializeField] float ATTACK_RANGE_MIN;
     Vector3 moveSpeed;
 
+    AI_STATE AiState;
+    float AiTimer;
+    enum AI_STATE { REST, ADVANCE, RETREAT, SPREAD, ATTACK, }
+
     protected override void Start() {
         base.Start();
         GameObject weaponObject = Instantiate(weaponPrefab, transform);
         weapon = weaponObject.GetComponent<Weapon>();
         weapon.SetFriendly(false);
+
+        AiState = AI_STATE.REST;
+        AiTimer = 0;
     }
 
     protected override void GameUpdate() {
-        AIGeneral();
+        AI();
+        return;
+        AiTimer -= deltaTime;
+        if (AiTimer <= 0) {
+            AiTimer = REACTION_TIME;
+        }
     }
 
-    void AIGeneral() {
+    void AI() {
+        switch (AiState) {
+            case AI_STATE.REST:
+                break;
+
+            case AI_STATE.ADVANCE:
+                break;
+
+            case AI_STATE.RETREAT:
+                break;
+
+            case AI_STATE.SPREAD:
+                break;
+
+            case AI_STATE.ATTACK:
+                break;
+        }
+
         Move();
         if (weapon.ready)
             Attack();

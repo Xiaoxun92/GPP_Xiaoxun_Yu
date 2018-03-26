@@ -91,8 +91,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponPrefab: {fileID: 1572482863230272, guid: a3ca66750412a0646bfa9aee54ae5ba0,
     type: 2}
+  HP: 0
   MOVE_SPEED: 0.2
   ROTATE_SPEED: 15
+  REACTION_TIME: 0.3
   AIM_ANGLE: 5
   MOVE_TIME_MAX: 2
   MOVE_TIME_MIN: 3
