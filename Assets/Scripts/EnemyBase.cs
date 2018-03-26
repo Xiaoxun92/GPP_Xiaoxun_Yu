@@ -13,15 +13,15 @@ public class EnemyBase : MonoExtended {
     protected GameObject player;
 
     protected virtual void Start() {
-        player = GameObject.FindWithTag(GameConst.TAG_PLAYER);
+        player = GameObject.FindWithTag("Player");
     }
 
     protected override void GameUpdate() {
     }
 
     // Hit by the player
-    protected void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.tag != GameConst.TAG_PLAYER_WEAPON)
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.layer != (int)LAYER.FRIENDLY_WEAPON)
             return;
         Destroy(gameObject);
     }

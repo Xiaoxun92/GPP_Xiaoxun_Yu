@@ -68,8 +68,8 @@ public class Player : MonoExtended {
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.tag != "EnemyWeapon")
+    void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.layer != (int)LAYER.ENEMY_WEAPON)
             return;
         gameManager.gameState = 2;
         Destroy(gameObject);

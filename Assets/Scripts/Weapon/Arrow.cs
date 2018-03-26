@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrow : MonoExtended {
+public class Arrow : Weapon {
 
     [SerializeField] float SPEED;
     [SerializeField] float RANGE;
@@ -44,5 +44,16 @@ public class Arrow : MonoExtended {
         Color c = effectSprite.color;
         c.a = effectAlpha;
         effectSprite.color = c;
+    }
+
+    protected override void Blocked() {
+        StartCoroutine("Destroy");
+    }
+
+    IEnumerator Destroy() {
+        gameObject.GetComponent<Rigidbody2D>().simulated = false;
+        transform.GetChild(0).gameObject.SetActive(false);
+        yield return new WaitForSeconds(0.2f);
+        Destroy(gameObject);
     }
 }

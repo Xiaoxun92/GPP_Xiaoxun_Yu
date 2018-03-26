@@ -1,4 +1,11 @@
 ﻿
+public enum LAYER {
+    PLAYER = 8,
+    ENEMY = 9,
+    FRIENDLY_WEAPON = 10,
+    ENEMY_WEAPON = 11,
+}
+
 public enum WEAPON_TYPE {
     SWORD, SPEAR, BOW, SHIELD,
 }
@@ -8,11 +15,6 @@ public enum EVENT_TYPE {
 }
 
 public static class GameConst {
-
-    public static string TAG_PLAYER = "Player";
-    public static string TAG_ENEMY = "Enemy";
-    public static string TAG_PLAYER_WEAPON = "PlayerWeapon";
-    public static string TAG_ENEMY_WEAPON = "EnemyWeapon";
 
 }
 

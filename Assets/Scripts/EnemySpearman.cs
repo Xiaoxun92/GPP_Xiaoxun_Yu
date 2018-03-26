@@ -20,7 +20,7 @@ public class EnemySpearman : EnemyBase {
         base.Start();
         GameObject weaponObject = Instantiate(weaponPrefab, transform);
         weapon = weaponObject.GetComponent<Weapon>();
-        weapon.SetTag(GameConst.TAG_ENEMY_WEAPON);
+        weapon.SetFriendly(false);
     }
 
     protected override void GameUpdate() {

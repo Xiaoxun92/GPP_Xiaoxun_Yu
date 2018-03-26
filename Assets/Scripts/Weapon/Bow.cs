@@ -7,18 +7,12 @@ public class Bow : Weapon {
     [SerializeField] GameObject arrowPrefab;
     [SerializeField] Transform arrowTransform;
 
-    string tag;
-
-    public override void SetTag(string t) {
-        tag = t;
-    }
-
     protected override void GameUpdate() {
     }
 
     public override void PrimaryAttack() {
         GameObject newArrow = Instantiate(arrowPrefab, arrowTransform.position, arrowTransform.rotation);
-        newArrow.tag = tag;
+        newArrow.GetComponent<Weapon>().SetFriendly(isFriendly);
         gameObject.GetComponent<Animator>().Play("Reload");
     }
 
