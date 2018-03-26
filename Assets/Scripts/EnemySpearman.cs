@@ -16,11 +16,11 @@ public class EnemySpearman : EnemyBase {
     [SerializeField] float ATTACK_RANGE_MIN;
     Vector3 moveSpeed;
 
-    [SerializeField] bool spearReady;
-    [SerializeField] bool moveLock;
-
-    new void Start() {
+    protected override void Start() {
         base.Start();
+        GameObject weaponObject = Instantiate(weaponPrefab, transform);
+        weapon = weaponObject.GetComponent<Weapon>();
+        weapon.SetTag(GameConst.TAG_ENEMY_WEAPON);
     }
 
     protected override void GameUpdate() {
@@ -29,12 +29,12 @@ public class EnemySpearman : EnemyBase {
 
     void AIGeneral() {
         Move();
-        if (spearReady)
+        if (weapon.ready)
             Attack();
     }
 
     void Move() {
-        if (moveLock)
+        if (weapon.lockDirection)
             return;
 
         // Waiting
@@ -66,7 +66,7 @@ public class EnemySpearman : EnemyBase {
     void Attack() {
         if (Mathf.Abs(transform.eulerAngles.z - GetPlayerDirection()) < AIM_ANGLE) {
             if (GetPlayerDistance() < ATTACK_RANGE_MAX && GetPlayerDistance() > ATTACK_RANGE_MIN)
-                gameObject.GetComponent<Animator>().Play("Stab");
+                weapon.PrimaryAttack();
         }
     }
 }

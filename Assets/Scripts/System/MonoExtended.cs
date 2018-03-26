@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Base class for all game objects
-public class ExtendedMono : MonoBehaviour {
+public abstract class MonoExtended : MonoBehaviour {
 
     EventManager eventManager;
     Dictionary<EVENT_TYPE, EventDelegate> eventDelegateList = new Dictionary<EVENT_TYPE, EventDelegate>();      // Record for destroy
@@ -39,8 +39,7 @@ public class ExtendedMono : MonoBehaviour {
     }
 
     // Game loop with a flexiable time scale
-    protected virtual void GameUpdate() {
-    }
+    protected abstract void GameUpdate();
 
     // Register and send events
     protected void RegisterEvent(EVENT_TYPE eventType, EventDelegate handler) {

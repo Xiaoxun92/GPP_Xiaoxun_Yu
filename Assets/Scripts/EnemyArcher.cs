@@ -5,13 +5,12 @@ using UnityEngine;
 public class EnemyArcher : EnemyBase {
 
     public float AIM_ANGLE;
-    [SerializeField] GameObject arrowSprite;
-    [SerializeField] GameObject arrowPrefab;
-
-    [SerializeField] bool bowReady;
 
     new void Start() {
         base.Start();
+        GameObject weaponObject = Instantiate(weaponPrefab, transform);
+        weapon = weaponObject.GetComponent<Weapon>();
+        weapon.SetTag(GameConst.TAG_ENEMY_WEAPON);
     }
 
     protected override void GameUpdate() {
@@ -19,7 +18,7 @@ public class EnemyArcher : EnemyBase {
     }
 
     void AIGeneral() {
-        if (bowReady)
+        if (weapon.ready)
             Attack();
         Move();
     }
@@ -32,8 +31,7 @@ public class EnemyArcher : EnemyBase {
         }
 
         // Shoot arrow
-        gameObject.GetComponent<Animator>().Play("Reload");
-        Instantiate(arrowPrefab, arrowSprite.transform.position, arrowSprite.transform.rotation);
+        weapon.PrimaryAttack();
     }
 
     void Move() {

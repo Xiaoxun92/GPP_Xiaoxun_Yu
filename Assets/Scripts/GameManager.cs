@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : ExtendedMono {
+public class GameManager : MonoExtended {
 
     public int gameState;
     
@@ -22,5 +22,8 @@ public class GameManager : ExtendedMono {
             else if (gameState == 0)
                 gameState = 1;
         }
+    }
+
+    protected override void GameUpdate() {
     }
 }

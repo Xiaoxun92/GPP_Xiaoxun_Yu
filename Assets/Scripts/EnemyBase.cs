@@ -2,24 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBase : ExtendedMono {
+public class EnemyBase : MonoExtended {
+
+    [SerializeField] protected GameObject weaponPrefab;
+    protected Weapon weapon;
 
     public float MOVE_SPEED;
     public float ROTATE_SPEED;
 
     protected GameObject player;
 
-    protected void Start() {
-        player = GameObject.FindWithTag("Player");
+    protected virtual void Start() {
+        player = GameObject.FindWithTag(GameConst.TAG_PLAYER);
     }
 
     protected override void GameUpdate() {
-
     }
 
     // Hit by the player
     protected void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.tag != "PlayerWeapon")
+        if (collision.tag != GameConst.TAG_PLAYER_WEAPON)
             return;
         Destroy(gameObject);
     }

@@ -4,17 +4,20 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 // Controls player plane's movement
-public class Player : ExtendedMono {
+public class Player : MonoExtended {
+
     public float ACCELERATION;
     public float MOVE_SPEED_MAX;
     public float FRICTION;
     public float ROTATE_SPEED;
 
+    Weapon weapon;
     Vector2 speed = new Vector2();
     WEAPON_TYPE currentWeapon;
 
     void Start() {
         currentWeapon = WEAPON_TYPE.SPEAR;
+        weapon = transform.GetChild(0).GetComponent<Weapon>();
     }
 
     protected override void GameUpdate() {
@@ -23,9 +26,9 @@ public class Player : ExtendedMono {
     }
 
     void Combat() {
-        switch (currentWeapon) {
-            case WEAPON_TYPE.SPEAR:
-                break;
+        if (Input.GetMouseButtonDown(0)) {
+            if (weapon.ready)
+                weapon.PrimaryAttack();
         }
     }
 
@@ -56,7 +59,7 @@ public class Player : ExtendedMono {
         // Direction controls
         switch (currentWeapon) {
             case WEAPON_TYPE.SPEAR:
-                if (transform.GetChild(0).gameObject.GetComponent<PlayerWeaponSpear>().directionLock == false) {
+                if (weapon.lockDirection == false) {
                     Vector3 cameraPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     float targetAngle = BasicFunc.VectorToAngle(cameraPos - transform.position);
                     BasicFunc.TransformMoveTowardsAngle(transform, targetAngle, ROTATE_SPEED * Time.deltaTime);
