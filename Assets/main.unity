@@ -150,11 +150,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4705347128508918, guid: af38056053180ac45972b32ecb67c7c4, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1606839630570906, guid: af38056053180ac45972b32ecb67c7c4, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1566552395508898, guid: af38056053180ac45972b32ecb67c7c4, type: 2}
       propertyPath: m_IsActive
@@ -575,8 +575,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1804560489}
   - {fileID: 1835866156}
+  - {fileID: 1804560489}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -667,11 +667,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4211688140815230, guid: a3ca66750412a0646bfa9aee54ae5ba0, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1572482863230272, guid: a3ca66750412a0646bfa9aee54ae5ba0, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a3ca66750412a0646bfa9aee54ae5ba0, type: 2}

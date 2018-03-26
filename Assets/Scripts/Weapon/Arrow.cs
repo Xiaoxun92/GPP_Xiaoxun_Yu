@@ -53,7 +53,7 @@ public class Arrow : Weapon {
     IEnumerator Destroy() {
         gameObject.GetComponent<Rigidbody2D>().simulated = false;
         transform.GetChild(0).gameObject.SetActive(false);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0f);
         Destroy(gameObject);
     }
 }

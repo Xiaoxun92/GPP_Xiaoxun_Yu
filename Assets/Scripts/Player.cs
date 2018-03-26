@@ -21,6 +21,18 @@ public class Player : MonoExtended {
     }
 
     protected override void GameUpdate() {
+        if (weapon.ready && Input.GetMouseButtonDown(1)) {
+            if (transform.GetChild(0).gameObject.activeSelf) {
+                weapon = transform.GetChild(1).GetComponent<Weapon>();
+                transform.GetChild(0).gameObject.SetActive(false);
+                transform.GetChild(1).gameObject.SetActive(true);
+            } else {
+                weapon = transform.GetChild(0).GetComponent<Weapon>();
+                transform.GetChild(0).gameObject.SetActive(true);
+                transform.GetChild(1).gameObject.SetActive(false);
+            }
+        }
+
         Combat();
         Movement();
     }

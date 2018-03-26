@@ -19,7 +19,7 @@ public abstract class MonoExtended : MonoBehaviour {
         gameManager = Camera.main.GetComponent<GameManager>();
     }
 
-    void Update() {
+    protected virtual void Update() {
         switch (gameManager.gameState) {
 
             case 0:
