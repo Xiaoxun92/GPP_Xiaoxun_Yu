@@ -4,13 +4,27 @@ using UnityEngine;
 
 public class Sword : Weapon {
 
+    [SerializeField] GameObject red;
+
     protected override void GameUpdate() {
     }
 
-    public override void PrimaryAttack() {
+    public override void PrimaryAction() {
         gameObject.GetComponent<Animator>().Play("SwordSlash");
     }
 
-    public override void SecondaryAttack() {
+    public override void SecondaryAction() {
+    }
+
+    protected override void Blocked() {
+        DeactiveRed();
+    }
+
+    public void ActiveRed() {
+        red.SetActive(true);
+    }
+
+    public void DeactiveRed() {
+        red.SetActive(false);
     }
 }

@@ -95,7 +95,7 @@ public class EnemySpearman : EnemyBase {
     void Attack() {
         if (Mathf.Abs(transform.eulerAngles.z - GetPlayerDirection()) < AIM_ANGLE) {
             if (GetPlayerDistance() < ATTACK_RANGE_MAX && GetPlayerDistance() > ATTACK_RANGE_MIN)
-                weapon.PrimaryAttack();
+                weapon.PrimaryAction();
         }
     }
 }

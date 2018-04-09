@@ -31,7 +31,7 @@ public class EnemyArcher : EnemyBase {
         }
 
         // Shoot arrow
-        weapon.PrimaryAttack();
+        weapon.PrimaryAction();
     }
 
     void Move() {

@@ -56,4 +56,10 @@ public class Arrow : Weapon {
         yield return new WaitForSeconds(0f);
         Destroy(gameObject);
     }
+
+    public override void PrimaryAction() {
+    }
+
+    public override void SecondaryAction() {
+    }
 }

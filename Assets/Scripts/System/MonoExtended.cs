@@ -16,7 +16,7 @@ public abstract class MonoExtended : MonoBehaviour {
 
     protected virtual void Awake() {
         eventManager = EventManager.GetInstance();
-        gameManager = Camera.main.GetComponent<GameManager>();
+        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
     }
 
     protected virtual void Update() {

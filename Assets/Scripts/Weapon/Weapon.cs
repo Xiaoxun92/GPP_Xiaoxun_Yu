@@ -17,9 +17,9 @@ public abstract class Weapon : MonoExtended {
             gameObject.gameObject.layer = (int)LAYER.ENEMY_WEAPON;
     }
 
-    public virtual void PrimaryAttack() { }
+    public abstract void PrimaryAction();
 
-    public virtual void SecondaryAttack() { }
+    public abstract void SecondaryAction();
 
     protected virtual void OnCollisionEnter2D(Collision2D collision) {
         if (gameObject.layer == (int)LAYER.ENEMY_WEAPON && collision.gameObject.layer == (int)LAYER.FRIENDLY_WEAPON) {
@@ -27,5 +27,5 @@ public abstract class Weapon : MonoExtended {
         }
     }
 
-    protected virtual void Blocked() { }
+    protected abstract void Blocked();
 }

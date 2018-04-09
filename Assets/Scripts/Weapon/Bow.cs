@@ -10,12 +10,15 @@ public class Bow : Weapon {
     protected override void GameUpdate() {
     }
 
-    public override void PrimaryAttack() {
+    public override void PrimaryAction() {
         GameObject newArrow = Instantiate(arrowPrefab, arrowTransform.position, arrowTransform.rotation);
         newArrow.GetComponent<Weapon>().SetFriendly(isFriendly);
         gameObject.GetComponent<Animator>().Play("Reload");
     }
 
-    public override void SecondaryAttack() {
+    public override void SecondaryAction() {
+    }
+
+    protected override void Blocked() {
     }
 }

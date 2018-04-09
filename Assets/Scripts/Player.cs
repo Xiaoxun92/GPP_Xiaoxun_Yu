@@ -6,30 +6,35 @@ using UnityEngine.SceneManagement;
 // Controls player plane's movement
 public class Player : MonoExtended {
 
-    public float ACCELERATION;
-    public float MOVE_SPEED_MAX;
-    public float FRICTION;
-    public float ROTATE_SPEED;
+    [SerializeField] float ACCELERATION;
+    [SerializeField] float MOVE_SPEED_MAX;
+    [SerializeField] float FRICTION;
+    [SerializeField] float ROTATE_SPEED;
+    [SerializeField] GameObject Spear;
+    [SerializeField] GameObject Sword;
+    [SerializeField] GameObject Shield;
 
-    Weapon weapon;
+    Weapon weaponPrimary;
+    Weapon weaponSecondary;
     Vector2 speed = new Vector2();
     WEAPON_TYPE currentWeapon;
 
     void Start() {
         currentWeapon = WEAPON_TYPE.SPEAR;
-        weapon = transform.GetChild(0).GetComponent<Weapon>();
+        weaponPrimary = Spear.GetComponent<Weapon>();
+        weaponSecondary = Shield.GetComponent<Weapon>();
     }
 
     protected override void GameUpdate() {
-        if (weapon.ready && Input.GetMouseButtonDown(1)) {
-            if (transform.GetChild(0).gameObject.activeSelf) {
-                weapon = transform.GetChild(1).GetComponent<Weapon>();
-                transform.GetChild(0).gameObject.SetActive(false);
-                transform.GetChild(1).gameObject.SetActive(true);
+        if (weaponPrimary.ready && Input.GetKeyDown(KeyCode.L)) {
+            if (Spear.activeSelf) {
+                weaponPrimary = Sword.GetComponent<Weapon>();
+                Spear.SetActive(false);
+                Sword.SetActive(true);
             } else {
-                weapon = transform.GetChild(0).GetComponent<Weapon>();
-                transform.GetChild(0).gameObject.SetActive(true);
-                transform.GetChild(1).gameObject.SetActive(false);
+                weaponPrimary = Spear.GetComponent<Weapon>();
+                Spear.SetActive(true);
+                Sword.SetActive(false);
             }
         }
 
@@ -38,15 +43,20 @@ public class Player : MonoExtended {
     }
 
     void Combat() {
-        if (Input.GetMouseButtonDown(0)) {
-            if (weapon.ready)
-                weapon.PrimaryAttack();
+        if (Input.GetKeyDown(KeyCode.K)) {
+            if (weaponPrimary.ready)
+                weaponPrimary.PrimaryAction();
+        }
+        if (Input.GetKeyDown(KeyCode.J)) {
+            if (weaponSecondary.ready)
+                weaponSecondary.PrimaryAction();
         }
     }
 
     void Movement() {
-        // Movement controls
+        // Handle controls
         Vector2 direction = new Vector2();
+        int rotation = 0;
         if (Input.GetAxis("Horizontal") > 0) {
             direction.x = 1;
         } else if (Input.GetAxis("Horizontal") < 0) {
@@ -58,6 +68,15 @@ public class Player : MonoExtended {
             direction.y = -1;
         }
 
+        if (Input.GetAxis("Rotate") > 0) {
+            rotation = 1;
+        } else if (Input.GetAxis("Rotate") < 0) {
+            rotation = -1;
+        }
+
+        // Rotate
+        transform.Rotate(0, 0, rotation * ROTATE_SPEED * Time.deltaTime);
+
         // Move & rotate
         if (direction.magnitude > 0) {
             speed += direction.normalized * ACCELERATION * Time.deltaTime;
@@ -66,18 +85,7 @@ public class Player : MonoExtended {
         } else {
             speed *= FRICTION;
         }
-        transform.position += (Vector3)speed * Time.deltaTime;
-
-        // Direction controls
-        switch (currentWeapon) {
-            case WEAPON_TYPE.SPEAR:
-                if (weapon.lockDirection == false) {
-                    Vector3 cameraPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                    float targetAngle = BasicFunc.VectorToAngle(cameraPos - transform.position);
-                    BasicFunc.TransformMoveTowardsAngle(transform, targetAngle, ROTATE_SPEED * Time.deltaTime);
-                }
-                break;
-        }
+        transform.position += (Vector3)transform.TransformVector(speed) * Time.deltaTime;
     }
 
     void OnCollisionEnter2D(Collision2D collision) {

@@ -2,29 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spear : Weapon {
+public class Shield : Weapon {
 
-    [SerializeField] GameObject red;
+    bool shieldUp = false;
+
+    void Start() {
+
+    }
 
     protected override void GameUpdate() {
     }
 
     public override void PrimaryAction() {
-        gameObject.GetComponent<Animator>().Play("Stab");
+        shieldUp = !shieldUp;
+        if (shieldUp)
+            gameObject.GetComponent<Animator>().Play("ShieldUp");
+        else
+            gameObject.GetComponent<Animator>().Play("ShieldDown");
     }
 
     public override void SecondaryAction() {
     }
 
     protected override void Blocked() {
-        DeactiveRed();
-    }
-
-    public void ActiveRed() {
-        red.SetActive(true);
-    }
-
-    public void DeactiveRed() {
-        red.SetActive(false);
     }
 }
