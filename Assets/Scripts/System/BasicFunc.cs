@@ -16,9 +16,8 @@ public static class BasicFunc {
         return new Vector2(-Mathf.Sin(a * Mathf.Deg2Rad), Mathf.Cos(a * Mathf.Deg2Rad));
     }
     
-    public static void TransformMoveTowardsAngle(Transform t, float target, float maxDelta) {
-        float angle = t.eulerAngles.z;
-        angle = Mathf.MoveTowardsAngle(angle, target, maxDelta);
+    public static void RotateTowardsAngle(Transform t, float target, float maxDelta) {
+        float angle = Mathf.MoveTowardsAngle(t.eulerAngles.z, target, maxDelta);
         t.eulerAngles = new Vector3(0, 0, angle);
     }
 }

@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using BehaviourTree;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBase : MonoExtended {
+public abstract class EnemyBase : MonoExtended {
 
     [SerializeField] protected GameObject weaponPrefab;
     protected Weapon weapon;
@@ -16,10 +17,10 @@ public class EnemyBase : MonoExtended {
 
     protected virtual void Start() {
         player = GameObject.FindWithTag("Player");
+        InitBehaviorTree();
     }
 
-    protected override void GameUpdate() {
-    }
+    protected abstract void InitBehaviorTree();
 
     // Hit by the player
     private void OnCollisionEnter2D(Collision2D collision) {

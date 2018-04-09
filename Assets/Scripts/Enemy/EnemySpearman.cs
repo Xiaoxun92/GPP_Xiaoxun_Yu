@@ -30,6 +30,9 @@ public class EnemySpearman : EnemyBase {
         AiTimer = 0;
     }
 
+    protected override void InitBehaviorTree() {
+    }
+
     protected override void GameUpdate() {
         AI();
         return;
@@ -89,7 +92,7 @@ public class EnemySpearman : EnemyBase {
         }
         // Continue moving
         transform.position += moveSpeed * Time.deltaTime;
-        BasicFunc.TransformMoveTowardsAngle(transform, GetPlayerDirection(), ROTATE_SPEED * Time.deltaTime);
+        BasicFunc.RotateTowardsAngle(transform, GetPlayerDirection(), ROTATE_SPEED * Time.deltaTime);
     }
 
     void Attack() {
