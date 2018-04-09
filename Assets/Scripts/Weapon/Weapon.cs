@@ -23,9 +23,9 @@ public abstract class Weapon : MonoExtended {
 
     protected virtual void OnCollisionEnter2D(Collision2D collision) {
         if (gameObject.layer == (int)LAYER.ENEMY_WEAPON && collision.gameObject.layer == (int)LAYER.FRIENDLY_WEAPON) {
-            Blocked();
+            Blocked(collision);
         }
     }
 
-    protected abstract void Blocked();
+    protected abstract void Blocked(Collision2D collision);
 }

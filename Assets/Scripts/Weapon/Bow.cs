@@ -19,6 +19,6 @@ public class Bow : Weapon {
     public override void SecondaryAction() {
     }
 
-    protected override void Blocked() {
+    protected override void Blocked(Collision2D collision) {
     }
 }

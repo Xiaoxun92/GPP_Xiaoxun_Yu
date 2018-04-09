@@ -7,6 +7,7 @@ public class Arrow : Weapon {
     [SerializeField] float SPEED;
     [SerializeField] float RANGE;
 
+    bool flying = true;
     Vector3 startPos;
     Vector3 deltaPos;
     SpriteRenderer effectSprite;
@@ -24,6 +25,9 @@ public class Arrow : Weapon {
     }
 
     protected override void GameUpdate() {
+        if (flying == false)
+            return;
+
         transform.position += deltaPos * Time.deltaTime;
         if ((transform.position - startPos).magnitude >= RANGE)
             Destroy(gameObject);
@@ -46,8 +50,15 @@ public class Arrow : Weapon {
         effectSprite.color = c;
     }
 
-    protected override void Blocked() {
-        StartCoroutine("Destroy");
+    protected override void Blocked(Collision2D collision) {
+        if (collision.gameObject.GetComponent<Shield>() != null) {
+            // Hit a shield. Attach the arrow to it
+            gameObject.GetComponent<Rigidbody2D>().simulated = false;
+            transform.GetChild(0).gameObject.SetActive(false);
+            transform.parent = collision.transform.GetChild(0);
+            flying = false;
+        } else
+            StartCoroutine("Destroy");
     }
 
     IEnumerator Destroy() {
